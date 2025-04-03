@@ -2,10 +2,15 @@ import fetcher from "$lib/fetcher";
 import { json } from "@sveltejs/kit";
 
 const query = `query GetDiscussion($number: Int!) {
-  repository(name: "github-cms", owner: "sharu725") {
+  repository(name: "github-cms", owner: "SynchronizesTeams") {
     discussion(number: $number) {
       bodyHTML
       title
+      createdAt
+      author {
+        login
+        avatarUrl
+      }
     }
   }
 }`;
@@ -25,6 +30,10 @@ export const GET = async ({ params: { number }, fetch, setHeaders }) => {
 
     return json(discussion);
   } catch (error) {
-    console.log(error);
+    console.error('Error fetching discussion:', error);
+    return json(
+      { error: 'Failed to fetch discussion', details: error.message },
+      { status: 500 }
+    );
   }
 };

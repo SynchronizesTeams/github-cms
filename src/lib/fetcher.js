@@ -13,7 +13,7 @@ const fetcher = async (query, variables, fetch) => {
     const { data } = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };

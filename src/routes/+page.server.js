@@ -2,11 +2,12 @@ import fetcher from "$lib/fetcher";
 import slugify from "@sindresorhus/slugify";
 
 const query = `{
-  repository(name: "github-cms", owner: "sharu725") {
+  repository(name: "github-cms", owner: "SynchronizesTeams") {
     discussions(first: 100, orderBy: {field: CREATED_AT, direction: DESC}) {
-      nodes {
+    nodes {
         title
         number
+        createdAt
       }
     }
   }
